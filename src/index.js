@@ -1,107 +1,130 @@
 import 'regenerator-runtime/runtime'
 
 import { initContract, login, logout } from './utils'
+import * as nearAPI from "near-api-js"
 
 import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
 // global variable used throughout
 let currentGreeting
-
-const submitButton = document.querySelector('form button')
-
-document.querySelector('form').onsubmit = async (event) => {
-  event.preventDefault()
-
-  // get elements from the form using their id attribute
-  const { fieldset, greeting } = event.target.elements
-
-  // disable the form while the value gets updated on-chain
-  fieldset.disabled = true
-
-  try {
-    // make an update call to the smart contract
-    await window.contract.setGreeting({
-      // pass the value that the user entered in the greeting field
-      message: greeting.value
-    })
-  } catch (e) {
-    alert(
-      'Something went wrong! ' +
-      'Maybe you need to sign out and back in? ' +
-      'Check your browser console for more info.'
-    )
-    throw e
-  } finally {
-    // re-enable the form, whether the call succeeded or failed
-    fieldset.disabled = false
+const { KeyPair, utils: {
+  PublicKey,
+  format: {
+    parseNearAmount, formatNearAmount
   }
+}, } = nearAPI;
 
-  // disable the save button, since it now matches the persisted value
-  submitButton.disabled = true
+// const submitButton = document.querySelector('form button')
 
-  // update the greeting in the UI
-  await fetchGreeting()
+// document.querySelector('form').onsubmit = async (event) => {
+//   event.preventDefault()
 
-  // show notification
-  document.querySelector('[data-behavior=notification]').style.display = 'block'
+//   // get elements from the form using their id attribute
+//   const { fieldset, greeting } = event.target.elements
 
-  // remove notification again after css animation completes
-  // this allows it to be shown again next time the form is submitted
-  setTimeout(() => {
-    document.querySelector('[data-behavior=notification]').style.display = 'none'
-  }, 11000)
-}
+//   // disable the form while the value gets updated on-chain
+//   fieldset.disabled = true
 
-document.querySelector('input#greeting').oninput = (event) => {
-  if (event.target.value !== currentGreeting) {
-    submitButton.disabled = false
-  } else {
-    submitButton.disabled = true
-  }
-}
+//   try {
+//     // make an update call to the smart contract
+//     await window.contract.setGreeting({
+//       // pass the value that the user entered in the greeting field
+//       message: greeting.value
+//     })
+//   } catch (e) {
+//     alert(
+//       'Something went wrong! ' +
+//       'Maybe you need to sign out and back in? ' +
+//       'Check your browser console for more info.'
+//     )
+//     throw e
+//   } finally {
+//     // re-enable the form, whether the call succeeded or failed
+//     fieldset.disabled = false
+//   }
+
+//   // disable the save button, since it now matches the persisted value
+//   submitButton.disabled = true
+
+//   // update the greeting in the UI
+//   await fetchGreeting()
+
+//   // show notification
+//   document.querySelector('[data-behavior=notification]').style.display = 'block'
+
+//   // remove notification again after css animation completes
+//   // this allows it to be shown again next time the form is submitted
+//   setTimeout(() => {
+//     document.querySelector('[data-behavior=notification]').style.display = 'none'
+//   }, 11000)
+// }
+
+// document.querySelector('input#greeting').oninput = (event) => {
+//   if (event.target.value !== currentGreeting) {
+//     submitButton.disabled = false
+//   } else {
+//     submitButton.disabled = true
+//   }
+// }
 
 document.querySelector('#sign-in-button').onclick = login
 document.querySelector('#sign-out-button').onclick = logout
 
 // Display the signed-out-flow container
 function signedOutFlow() {
-  document.querySelector('#signed-out-flow').style.display = 'block'
+  //   document.querySelector('#signed-out-flow').style.display = 'block'
 }
 
 // Displaying the signed in flow container and fill in account-specific data
-function signedInFlow() {
-  document.querySelector('#signed-in-flow').style.display = 'block'
+export const signedInFlow = async () => {
+  //   document.querySelector('#signed-in-flow').style.display = 'block'
 
-  document.querySelectorAll('[data-behavior=account-id]').forEach(el => {
-    el.innerText = window.accountId
-  })
+  //   document.querySelectorAll('[data-behavior=account-id]').forEach(el => {
+  //     el.innerText = window.accountId
+  //   })
+  // console.log(window.walletConnection);
+  const account = window.account;
+  const balance = formatNearAmount((await account.getAccountBalance()).available);
+  document.querySelector('#account-id').innerHTML = window.accountId;
+  document.querySelector('#balance').innerHTML = balance;
+  const contract = await new nearAPI.Contract(account, 'testnet', {
+    changeMethods: ['send', 'create_account', 'create_account_and_claim'],
+  });
+  console.log(contract);
 
-  // populate links in the notification box
-  const accountLink = document.querySelector('[data-behavior=notification] a:nth-of-type(1)')
-  accountLink.href = accountLink.href + window.accountId
-  accountLink.innerText = '@' + window.accountId
-  const contractLink = document.querySelector('[data-behavior=notification] a:nth-of-type(2)')
-  contractLink.href = contractLink.href + window.contract.contractId
-  contractLink.innerText = '@' + window.contract.contractId
+  // console.log(window.account);
+  // console.log(near);
 
-  // update with selected networkId
-  accountLink.href = accountLink.href.replace('testnet', networkId)
-  contractLink.href = contractLink.href.replace('testnet', networkId)
+  //   // populate links in the notification box
+  //   const accountLink = document.querySelector('[data-behavior=notification] a:nth-of-type(1)')
+  //   accountLink.href = accountLink.href + window.accountId
+  //   accountLink.innerText = '@' + window.accountId
+  //   const contractLink = document.querySelector('[data-behavior=notification] a:nth-of-type(2)')
+  //   contractLink.href = contractLink.href + window.contract.contractId
+  //   contractLink.innerText = '@' + window.contract.contractId
 
-  fetchGreeting()
+  //   // update with selected networkId
+  //   accountLink.href = accountLink.href.replace('testnet', networkId)
+  //   contractLink.href = contractLink.href.replace('testnet', networkId)
+
+  //   fetchGreeting()
 }
 
 // update global currentGreeting variable; update DOM with it
-async function fetchGreeting() {
-  currentGreeting = await contract.getGreeting({ accountId: window.accountId })
-  document.querySelectorAll('[data-behavior=greeting]').forEach(el => {
-    // set divs, spans, etc
-    el.innerText = currentGreeting
+// async function fetchGreeting() {
+//   currentGreeting = await contract.getGreeting({ accountId: window.accountId })
+//   document.querySelectorAll('[data-behavior=greeting]').forEach(el => {
+//     // set divs, spans, etc
+//     el.innerText = currentGreeting
 
-    // set input elements
-    el.value = currentGreeting
-  })
+//     // set input elements
+//     el.value = currentGreeting
+//   })
+// }
+
+const createAccount = async () => {
+
 }
 
 // `nearInitPromise` gets called on page load
