@@ -1,4 +1,4 @@
-import { connect, Contract, keyStores, WalletConnection, WalletAccount } from 'near-api-js'
+import { connect, Contract, keyStores, WalletConnection, WalletAccount, Account } from 'near-api-js'
 import getConfig from './config'
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development')
@@ -26,6 +26,21 @@ export async function initContract() {
     // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ['send', 'create_account', 'create_account_and_claim'],
   })
+}
+
+export async function isAccountTaken (accountId) {
+  const near = await connect(Object.assign({ deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() } }, nearConfig))
+
+  const account = new Account(near.connection, accountId);
+  try {
+      await account.state()
+  } catch(e) {
+      console.warn(e)
+      if (/does not exist while viewing/.test(e.toString())) {
+          return false
+      }
+  }
+  return true
 }
 
 export function logout() {
