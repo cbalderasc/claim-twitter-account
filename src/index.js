@@ -88,11 +88,6 @@ export const signedInFlow = async () => {
   const balance = formatNearAmount((await account.getAccountBalance()).available);
   document.querySelector('#account-id').innerHTML = window.accountId;
   document.querySelector('#balance').innerHTML = balance;
-  const contract = await new nearAPI.Contract(account, 'testnet', {
-    changeMethods: ['send', 'create_account', 'create_account_and_claim'],
-  });
-  console.log(contract);
-
   // console.log(window.account);
   // console.log(near);
 
@@ -111,6 +106,16 @@ export const signedInFlow = async () => {
   //   fetchGreeting()
 }
 
+const createAccount = async (account_id) => {
+  const account = window.wallet;
+  const contract = await new nearAPI.Contract(account, 'testnet', {
+    changeMethods: ['send', 'create_account', 'create_account_and_claim'],
+  });
+  const keyPair = KeyPair.fromRandom('ed25519');
+  const amount = parseNearAmount(1);
+  await contract.create_account({ new_account_id: accountId, new_public_key: keyPair.publicKey.toString() }, GAS, parseNearAmount(amount))
+}
+
 // update global currentGreeting variable; update DOM with it
 // async function fetchGreeting() {
 //   currentGreeting = await contract.getGreeting({ accountId: window.accountId })
@@ -122,10 +127,6 @@ export const signedInFlow = async () => {
 //     el.value = currentGreeting
 //   })
 // }
-
-const createAccount = async () => {
-
-}
 
 // `nearInitPromise` gets called on page load
 window.nearInitPromise = initContract()

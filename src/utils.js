@@ -1,4 +1,4 @@
-import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
+import { connect, Contract, keyStores, WalletConnection, WalletAccount } from 'near-api-js'
 import getConfig from './config'
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development')
@@ -11,6 +11,8 @@ export async function initContract() {
   // Initializing Wallet based Account. It can work with NEAR testnet wallet that
   // is hosted at https://wallet.testnet.near.org
   window.walletConnection = new WalletConnection(near)
+
+  window.wallet = new WalletAccount(near);
 
   // Getting the Account ID. If still unauthorized, it's just empty string
   window.accountId = window.walletConnection.getAccountId()
