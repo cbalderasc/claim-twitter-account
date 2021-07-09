@@ -19,19 +19,66 @@ body {
     }
 }
 
+.container {
+    width: 100%;
+    max-width: 600px;
+    flex-wrap: wrap;
+}
+
+.row {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+#data {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+
+    #account-id {
+        font-weight: 800;
+        font-size: 120%;
+    }
+}
+
+#auth {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
 #loading-form {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+#list-rendered {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 4px #333;
+    padding: 30px;
+    width: 100%;
+    display: none;
+    margin-top: 20px;
+
+    button {}
+}
+
+#list-rendered-inner {
+    list-style: none;
+    padding: 0;
 }
 
 form {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 4px #333;
-    width: 100%;
-    max-width: 600px;
     padding: 30px;
+    width: 100%;
 
     /*
     input {
