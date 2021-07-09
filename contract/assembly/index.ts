@@ -1,21 +1,22 @@
 import { Context, logging, storage, PersistentMap } from 'near-sdk-as'
-import { userData } from './model'
+import { userData, UserData } from './model'
 
 
 
-export function saveUserDataForClaiming(accountId: string, ): string | null { 
-  return ''; 
+export function save_user_data_for_claiming(accountId: string, key: string, link: string, claimed: bool): void { 
+  let ud = new UserData(key, claimed, link, accountId);
+  userData.push(ud);
+  logging.log("User data added");
 }
 
-export function setGreeting(message: string): void {
-  const account_id = Context.sender
+export function change_claimed_state(accountId: string):void {
+  
+}
 
-  // Use logging.log to record logs permanently to the blockchain!
-  logging.log(
-    // String interpolation (`like ${this}`) is a work in progress:
-    // https://github.com/AssemblyScript/assemblyscript/pull/1115
-    'Saving greeting "' + message + '" for account "' + account_id + '"'
-  )
-
-  storage.set(account_id, message)
+export function get_user_data(): Array<UserData> {
+  const result = new Array<UserData>(userData.length);
+  for (let i = 0; i < userData.length; i++) {
+    result[i] = userData[i];
+  }
+  return result;
 }
