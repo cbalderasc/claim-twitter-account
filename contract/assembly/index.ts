@@ -13,6 +13,12 @@ export function change_claimed_state(accountId: string):void {
   
 }
 
+export function remove_all_elements(accountId: string):void {
+  while(userData.length > 0) {
+    userData.pop();
+  }
+}
+
 export function get_user_data(): Array<UserData> {
   const result = new Array<UserData>(userData.length);
   for (let i = 0; i < userData.length; i++) {

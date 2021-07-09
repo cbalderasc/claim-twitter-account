@@ -11,9 +11,9 @@
     <div class="container">
         <form>
             <h3>Claim your wallet</h3>
-            <input type="text" readonly>
+            <textarea style="resize: none;width: 90%;" id="seed-phrase" type="text" readonly><button type="button" id="gnt-seed">Generate seed phrase</button>
             <p>Save your seed phrase in a safe place please.</p>
-            <button>Claim</button>
+            <button id="claim-button">Claim</button>
         </form>
     </div>
     <script src="claim.js"></script>

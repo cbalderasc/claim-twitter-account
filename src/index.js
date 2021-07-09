@@ -6,8 +6,6 @@ import * as nearAPI from "near-api-js"
 import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
-// global variable used throughout
-let currentGreeting
 const { KeyPair, utils: {
 	PublicKey,
 	format: {
@@ -30,9 +28,10 @@ function signedOutFlow() {
 export const signedInFlow = async () => {
 	const account = window.account;
 	const balance = formatNearAmount((await account.getAccountBalance()).available);
-	
 	document.querySelector('#account-id').innerHTML = window.accountId;
 	document.querySelector('#balance').innerHTML = balance + " NEAR";
+  let ud = await window.contract.get_user_data();
+  console.log(ud);
 }
 
 async function createAccount(list){
@@ -41,15 +40,15 @@ async function createAccount(list){
 	const taken = await isAccountTaken(recipient);
 	
 	const contract = await new nearAPI.Contract(account.account(), 'testnet', {
-		changeMethods: ['send', 'create_account', 'create_account_and_claim'],
+		changeMethods: ['send', 'create_account', 'create_account_and_claim', 'save_user_data_for_claiming'],
 	});
 
   const keyPair = KeyPair.fromRandom('ed25519');
   const formattedKeyPair = keyPair.publicKey.toString();
-  let link = `?accountId=${new_id}&key=${keyPair}`;
-  
-  await window.contract.save_user_data_for_claiming({accountId: new_id, key: formattedKeyPair, link: link, claimed: false});
-	await contract.create_account({ new_account_id: recipient, new_public_key: keyPair.publicKey.toString() }, '200000000000000')
+  let link = `?accountId=${recipient}&key=${formattedKeyPair}`;
+
+  await window.contract.save_user_data_for_claiming({accountId: recipient, key: formattedKeyPair, link: link, claimed: false});
+	await contract.create_account({ new_account_id: recipient, new_public_key: keyPair.publicKey.toString() }, '200000000000000', parseNearAmount('1'))
 }
 
 // update global currentGreeting variable; update DOM with it
