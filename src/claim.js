@@ -50,6 +50,8 @@ async function claim() {
         console.log("claimed");
         return;
     }
+    const publicKey = localStorage.getItem('PUB_KEY');
+    console.log("Public key from localstorage: " + publicKey);
     const account = new nearAPI.Account(near.connection, accountId);
     const accessKeys = await account.getAccessKeys();
     console.log(accessKeys);

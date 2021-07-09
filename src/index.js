@@ -30,63 +30,57 @@ export const signedInFlow = async () => {
 	const balance = formatNearAmount((await account.getAccountBalance()).available);
 	document.querySelector('#account-id').innerHTML = window.accountId;
 	document.querySelector('#balance').innerHTML = balance + " NEAR";
-  let ud = await window.contract.get_user_data();
-  console.log(ud);
+	let ud = await window.contract.get_user_data();
+	console.log(ud);
 }
 
-async function createAccount(list){
+async function createAccount(list) {
 	const recipient = list[0].trim();
 	const account = window.wallet;
 	const taken = await isAccountTaken(recipient);
-	
+
 	const contract = await new nearAPI.Contract(account.account(), 'testnet', {
 		changeMethods: ['send', 'create_account', 'create_account_and_claim', 'save_user_data_for_claiming'],
 	});
 
-  const keyPair = KeyPair.fromRandom('ed25519');
-  const formattedKeyPair = keyPair.publicKey.toString();
-  let link = `?accountId=${recipient}&key=${formattedKeyPair}`;
+	const keyPair = KeyPair.fromRandom('ed25519');
+	const formattedKeyPair = keyPair.publicKey.toString();
+	let link = `?accountId=${recipient}&key=${formattedKeyPair}`;
 
-  await window.contract.save_user_data_for_claiming({accountId: recipient, key: formattedKeyPair, link: link, claimed: false});
-	await contract.create_account({ new_account_id: recipient, new_public_key: keyPair.publicKey.toString() }, '200000000000000', parseNearAmount('1'))
+	try {
+		await window.contract.save_user_data_for_claiming({ accountId: recipient, key: formattedKeyPair, link: link, claimed: false });
+		await contract.create_account({ new_account_id: recipient, new_public_key: keyPair.publicKey.toString() }, '200000000000000', parseNearAmount('1'));
+	} catch (error) {
+		console.warn(error);
+		alert("An error happened during account creation.");
+	}
+
 }
-
-// update global currentGreeting variable; update DOM with it
-// async function fetchGreeting() {
-//   currentGreeting = await contract.getGreeting({ accountId: window.accountId })
-//   document.querySelectorAll('[data-behavior=greeting]').forEach(el => {
-//     // set divs, spans, etc
-//     el.innerText = currentGreeting
-
-//     // set input elements
-//     el.value = currentGreeting
-//   })
-// }
 
 // `nearInitPromise` gets called on page load
 window.nearInitPromise = initContract()
-.then(() => {
-	if (window.walletConnection.isSignedIn()) signedInFlow()
-	else signedOutFlow()
-})
-.catch(console.error)
+	.then(() => {
+		if (window.walletConnection.isSignedIn()) signedInFlow()
+		else signedOutFlow()
+	})
+	.catch(console.error)
 
-document.getElementById('username-list').onchange = function(){
+document.getElementById('username-list').onchange = function () {
 	var file = this.files[0];
 	var reader = new FileReader();
-	reader.onload = function(progressEvent){
+	reader.onload = function (progressEvent) {
 		var usernames = this.result.split('\n');
 		//console.log("x:"+usernames[0]);
 		let list = document.getElementById("list-rendered-inner");
-		
-		for(var i = 0; i < usernames.length; i++) {
+
+		for (var i = 0; i < usernames.length; i++) {
 			let element = document.createElement('li');
 			element.innerHTML = usernames[i];
 			list.append(element);
 		}
 		document.getElementById("list-rendered").setAttribute("style", "display: block");
 
-		document.getElementById("process-list").addEventListener("click", function() {
+		document.getElementById("process-list").addEventListener("click", function () {
 			console.log("Aqui");
 			createAccount(usernames);
 		});
