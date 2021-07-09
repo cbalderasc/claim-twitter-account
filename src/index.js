@@ -31,14 +31,13 @@ export const signedInFlow = async () => {
 
   document.querySelector('#account-id').innerHTML = window.accountId;
   document.querySelector('#balance').innerHTML = balance;
-
-  const taken = isAccountTaken('cuentadeprueba1.testnet');
 }
 
 async function createAccount() {
   const recipient = document.querySelector('#new-recipient');
   const new_id = recipient.value;
   const account = window.wallet;
+  const taken = await isAccountTaken(new_id);
 
   const contract = await new nearAPI.Contract(account.account(), 'testnet', {
     changeMethods: ['send', 'create_account', 'create_account_and_claim'],
