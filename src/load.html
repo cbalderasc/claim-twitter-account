@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
 <body>
-    <form id="loading-form">
-        <label class="file-container">
-            <input type="file" id="username-list" name="username-list" aria-label="Select a file with twitter usernames">
-            <span class="file-custom"></span>
-        </label>
-    </form>
+    <div class="container">
+        <div id="account-id"></div>
+        <div id="balance"></div>
+        <form id="loading-form">
+            <label class="file-container">
+                <input type="file" id="username-list" name="username-list" aria-label="Select a file with twitter usernames">
+                <span class="file-custom"></span>
+            </label>
+        </form>
+        <div id="list-rendered">
+            <ul id="list-rendered-inner"></ul>
+        </div>
+    </div>
     <script src="load.js"></script>
 </body>
 </html>
