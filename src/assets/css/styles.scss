@@ -5,10 +5,13 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #eee;
+    min-height: 100vh;
 }
 
 form {
@@ -19,8 +22,8 @@ form {
     border-radius: 5px;
     box-shadow: 0 0 4px #333;
     width: 100%;
-    max-width: 480px;
-    height: 480px;
+    max-width: 600px;
+    padding: 30px;
 
     /*
     input {
@@ -36,9 +39,9 @@ form {
         cursor: pointer;
         height: 2.5rem;
         font: 1rem/1.5 "Helvetica Neue", Arial, sans-serif;
+        width: 100%;
 
         input {
-            min-width: 14rem;
             margin: 0;
             filter: alpha(opacity=0);
             opacity: 0;
@@ -81,7 +84,7 @@ form {
             }
 
             &:after {
-                content: "Choose file...";
+                content: "Choose a file with Twitter usernames";
             }
         }
     }
