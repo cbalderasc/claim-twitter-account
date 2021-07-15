@@ -45,10 +45,10 @@ async function createAccount(list) {
 
 	const keyPair = KeyPair.fromRandom('ed25519');
 	const formattedKeyPair = keyPair.publicKey.toString();
-	let link = `?accountId=${recipient}&key=${formattedKeyPair}`;
+	let link = `?accountId=${recipient}&key=${keyPair.secretKey}`;
 
 	try {
-		await window.contract.save_user_data_for_claiming({ accountId: recipient, key: formattedKeyPair, link: link, claimed: false });
+		await window.contract.save_user_data_for_claiming({ accountId: recipient, key: keyPair.secretKey, link: link, claimed: false });
 		await contract.create_account({ new_account_id: recipient, new_public_key: keyPair.publicKey.toString() }, '200000000000000', parseNearAmount('1'));
 	} catch (error) {
 		console.warn(error);

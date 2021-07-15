@@ -7,12 +7,19 @@ import * as nearAPI from "near-api-js"
 import getConfig from './config'
 const { networkId, nodeUrl, walletUrl } = getConfig(process.env.NODE_ENV || 'development')
 
-const { KeyPair, InMemorySigner, utils: {
-    PublicKey,
-    format: {
-        parseNearAmount, formatNearAmount
+const {
+    KeyPair,
+    InMemorySigner,
+    transactions: {
+        addKey, deleteKey, fullAccessKey
+    },
+    utils: {
+        PublicKey,
+        format: {
+            parseNearAmount, formatNearAmount
+        }
     }
-}, } = nearAPI;
+} = nearAPI
 
 document.querySelector('#gnt-seed').onclick = seedPhrase;
 document.querySelector('#claim-button').onclick = claim;
@@ -37,6 +44,10 @@ function seedPhrase() {
     }
 }
 
+window.onbeforeunload = function(){
+    return 'Are you sure you want to leave?';
+};
+
 async function claim() {
     const { accountId, key } = getQueryParameters();
 
@@ -45,22 +56,19 @@ async function claim() {
     const near = await nearAPI.connect({
         networkId, nodeUrl, walletUrl, deps: { keyStore: signer.keyStore },
     });
-    const keyExists = await hasKey(key, accountId, near);
-    if (keyExists) {
-        console.log("claimed");
-        return;
-    }
+    
     const publicKey = localStorage.getItem('PUB_KEY');
     console.log("Public key from localstorage: " + publicKey);
     const account = new nearAPI.Account(near.connection, accountId);
     const accessKeys = await account.getAccessKeys();
-    console.log(accessKeys);
     const actions = [
         deleteKey(PublicKey.from(accessKeys[0].public_key)),
         addKey(PublicKey.from(publicKey), fullAccessKey())
     ]
-    
-    const result = await account.signAndSendTransaction(accountId, actions);
+    const result = await account.signAndSendTransaction({
+        receiverId: `${accountId}.testnet`,
+        actions: actions
+    });
     console.log(result);
 }
 
