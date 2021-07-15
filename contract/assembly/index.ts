@@ -26,3 +26,16 @@ export function get_user_data(): Array<UserData> {
   }
   return result;
 }
+
+export function get_user_data_by_name(username:string): Array<UserData> {
+  const result = new Array<UserData>(1);
+  for (let i = 0; i < userData.length; i++) {
+    const elem = userData[i];
+    if (elem.accountId.toString() == username) {
+      result[0] = userData[i];
+      break;
+    }
+  }
+  logging.log(result.toString());
+  return result;
+}

@@ -13,6 +13,10 @@ export class UserData {
         this.link = link;
         this.accountId = accountId;
     }
+
+    toString():string {
+        return "key: " + this.publicKey +"\n" + "accId: " + this.accountId;
+    }
 }
 
 export let userData = new PersistentVector<UserData>("data")
