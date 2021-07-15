@@ -9,8 +9,20 @@
 </head>
 <body>
     <div class="container">
-        <form>
+        <div id="twitter-login" style="text-align: center;">
+            <p>
+                Before claiming an account you need to login with Twitter 
+            </p>
+            <a href="#!" id="make-twitter-auth">
+                <img src="assets/twitter_button.png" alt="" width="330px">
+            </a>
+        </div>
+        <div id="loged-message" style="display: none;">
+        </div>
+        <form id="claiming-form" style="display: none;">
             <h3>Claim your wallet</h3>
+            <input type="hidden" id="username">
+            <input type="hidden" id="key">
             <textarea style="resize: none;width: 90%;" id="seed-phrase" type="text" readonly><button type="button" id="gnt-seed">Generate seed phrase</button>
             <p>Save your seed phrase in a safe place please.</p>
             <button id="claim-button">Claim</button>
@@ -18,4 +30,8 @@
     </div>
     <script src="claim.js"></script>
 </body>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="twitter_auth.js"></script>
 </html>

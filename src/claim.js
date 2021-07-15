@@ -30,8 +30,42 @@ function getQueryParameters() {
     return params;
 }
 
-function seedPhrase() {
-    const { accountId, key } = getQueryParameters();
+export const searchUser = async () => {
+    const account = window.account;
+	let ud = await window.contract.get_user_data();
+	console.log(ud);
+    let username = document.querySelector('#username').value;
+
+	for( var i = 0; i < ud.length; i++ ) {
+		/*console.log('Item '+i);
+		console.log(ud[i]['accountId']);*/
+        if( ud[i]['accountId'] == username ) {
+            return ud[i]['publicKey'];
+        }
+	}
+
+    return "-1";
+}
+
+async function seedPhrase() {
+
+    let accountId = null;
+    let key = null;
+    // here comes the public key
+    // and the user or accountId is already loaded in the form
+    let response = await searchUser(); 
+    if(response == "-1") {
+        console.log('user not found on the list');
+    }
+    else {
+        console.log('public key = '+response);
+        accountId = document.querySelector('#username').value;
+        // set the key in the form, just for reference
+        document.querySelector('#key').value = response;
+        key = response;
+    }
+
+    //const { accountId, key } = getQueryParameters();
 
     if (accountId && key) {
         const { seedPhrase, publicKey } = generateSeedPhrase()
@@ -49,7 +83,9 @@ window.onbeforeunload = function(){
 };
 
 async function claim() {
-    const { accountId, key } = getQueryParameters();
+    // const { accountId, key } = getQueryParameters();
+    let accountId = document.querySelector('#username').value;
+    let key = document.querySelector('#key').value;
 
     const keyPair = KeyPair.fromString(key);
     const signer = await InMemorySigner.fromKeyPair(networkId, accountId, keyPair);
@@ -94,3 +130,10 @@ export const hasKey = async (key, accountId, near) => {
     return false
 }
 
+// `nearInitPromise` gets called on page load
+window.nearInitPromise = initContract()
+	.then(() => {
+		/*if (window.walletConnection.isSignedIn()) signedInFlow()
+		else signedOutFlow()*/
+	})
+	.catch(console.error)

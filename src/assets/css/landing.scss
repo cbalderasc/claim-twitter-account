@@ -1,0 +1,237 @@
+/// ======================================
+/// Landing page
+/// ======================================
+$blue: #0072ce;
+
+html, body {
+    font-family: "Inter";
+    font-size: 16px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    @media(max-width: 1280px) {
+        font-size: 15px;
+    }
+
+    @media(max-width: 992px) {
+        font-size: 14px;
+    }
+
+    @media(max-width: 768px) {
+        font-size: 13px;
+    }
+
+    @media(max-width: 640px) {
+        font-size: 12px;
+    }
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 7px solid #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .boxed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo {
+        width: 150px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .menubar {
+        text-align: right;
+        width: calc(100% - 150px);
+
+        @media(max-width: 640px) {
+            display: none;
+        }
+
+        a {
+            padding: 5px 10px;
+            margin: 0 10px;
+        }
+    }
+}
+
+main {
+    margin-top: 65px;
+    min-height: calc(100% - 100px);
+    width: 100%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0;
+    height: 100px;
+    color: #000;
+    font-weight: 600;
+    font-size: 1.1rem;
+    width: 100%;
+
+    @media(max-width: 640px) {
+        height: auto;
+    }
+
+    .boxed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    a, span.caption {
+        padding: 5px 10px;
+        margin: 0 10px;
+
+        @media(max-width: 640px) {
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    .pipe {
+        @media(max-width: 640px) {
+            display: none;
+        }
+    }
+}
+
+a {
+    color: #000;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+
+    &:hover {
+        color: $blue;
+    }
+}
+
+h2 {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin: 0 0 20px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.boxed {
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 10px 20px;
+    width: 100%;
+
+    @media(max-width: 480px) {
+        padding: 10px;
+    }
+}
+
+section {
+    width: 100%;
+
+    .boxed {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+.main-layout {
+    padding: 30px 0;
+    width: 100%;
+
+    .image {
+        padding: 20px;
+        width: 50%;
+
+        @media(max-width: 640px) {
+            width: 100%;
+        }
+    }
+
+    .text {
+        padding: 20px;
+        width: 50%;
+
+        @media(max-width: 640px) {
+            width: 100%;
+        }
+    }
+}
+
+.full-layout {
+    padding: 30px 0;
+    width: 100%;
+
+    .image {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .text {
+        padding: 20px;
+        width: 100%;
+    }
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+
+    svg {
+        margin-right: 10px;
+    }
+}
+
+.centered {
+    text-align: center;
+}
+
+.reduced {
+    margin: 0 auto;
+    max-width: 768px;
+    width: 100%;
+}
+
+.bg-blue {
+    background-color: $blue;
+    color: #fff;
+}
+
+.blue {
+    color: $blue;
+}
+
+.bg-black {
+    background-color: #000;
+    color: #fff;
+}
+
+.bgsvg {
+    background-image: url('../illo-developers.svg');
+    background-size: cover;
+}
