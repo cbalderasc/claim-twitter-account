@@ -100,7 +100,7 @@ async function claim() {
         addKey(PublicKey.from(publicKey), fullAccessKey())
     ]
     const result = await account.signAndSendTransaction({
-        receiverId: `${accountId}.testnet`,
+        receiverId: `${accountId}`,
         actions: actions
     });
     console.log(result);
