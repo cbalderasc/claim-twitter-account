@@ -35,14 +35,17 @@ export const searchUser = async () => {
 	let ud = await window.contract.get_user_data();
     let username = document.querySelector('#username').value;
     console.log(ud);
+    
 	for( var i = 0; i < ud.length; i++ ) {
 		/*console.log('Item '+i);
 		console.log(ud[i]['accountId']);*/
         if( ud[i]['accountId'] == username ) {
+            document.querySelector('#index').value = i;
             return ud[i]['publicKey'];
         }
 	}
 
+    document.querySelector('#index').value = '-1';
     return "-1";
 }
 

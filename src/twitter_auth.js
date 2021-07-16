@@ -19,30 +19,39 @@ firebase.analytics();
 
 document.querySelector('#make-twitter-auth').onclick = signin;
 
-/*function signin() {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    console.log(params);
-    return params;
-}*/
-
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       var uid = user.uid;
-      console.log("User state change to correct");
-      //document.querySelector('#twitter-login').style.display = 'none';
-      document.querySelector('#claiming-form').style.display = 'block';
-      document.querySelector('#loged-message').style.display = 'block';
+      console.log("User state change to correct "+user.uid);
+      console.log('user photo = '+user.photoURL);
+      let image = document.querySelector('#profile-image');
+      image.src = "https://pbs.twimg.com/profile_images/1350519257172488192/AgDmYNsJ_normal.jpg";
 
-      const cookieValue = document.cookie
+      const checkCookie = getCookie('username');
+      let cookieValue = "";
+
+      if( checkCookie == null ) {
+          //show signin method still
+          console.log("Show the sign in button");
+          document.querySelector('#twitter-login').style.display = 'block';
+          document.querySelector('#claiming-form').style.display = 'none';
+          document.querySelector('#loged-message').style.display = 'none';
+      }
+      else {
+        console.log(checkCookie);
+        cookieValue = document.cookie
         .split('; ')
         .find(row => row.startsWith('username='))
         .split('=')[1];
-        
+        //
+        document.querySelector('#twitter-login').style.display = 'none';
+        document.querySelector('#claiming-form').style.display = 'block';
+        document.querySelector('#loged-message').style.display = 'block';
         document.querySelector('#loged-message').innerHTML = "Wellcome <br>@" + cookieValue;
         document.querySelector('#username').value = cookieValue;
+      }
       // ...
     } else {
       // User is signed out
@@ -93,9 +102,9 @@ function signin() {
             console.log(params);*/
 
             /*document.querySelector('#name').innerHTML = user.displayName;
-            document.querySelector('#username').innerHTML = "@" + result.additionalUserInfo.username;
-            image = document.querySelector('#image');
-            image.src = "https://pbs.twimg.com/profile_images/1350519257172488192/AgDmYNsJ_normal.jpg";*/
+            document.querySelector('#username').innerHTML = "@" + result.additionalUserInfo.username;*/
+            let image = document.querySelector('#profile-image');
+            image.src = "https://pbs.twimg.com/profile_images/1350519257172488192/AgDmYNsJ_normal.jpg";
 
         }).catch((error) => {
             console.log("There was an error in the twitter auth");
@@ -110,6 +119,7 @@ function signin() {
             // ...
         });
 }
+
 function signout() {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
@@ -120,3 +130,30 @@ function signout() {
         messenger.textContent = "There was an error while login out";
     });
 }
+
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+} 
+
+window.nearInitPromise = initContract()
+	.then(() => {
+        //
+	})
+	.catch(console.error)

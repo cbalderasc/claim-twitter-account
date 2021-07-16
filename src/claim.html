@@ -17,7 +17,10 @@
                 <img src="assets/twitter_button.png" alt="" width="330px">
             </a>
         </div>
-        <div id="loged-message" style="display: none;">
+        <div class="profile">
+            <img id="profile-image" src="" alt="">
+            <div id="loged-message" style="display: none;">
+            </div>
         </div>
         <div id="current-message">
         </div>
@@ -25,6 +28,7 @@
             <h3>Claim your wallet</h3>
             <input type="hidden" id="username">
             <input type="hidden" id="key">
+            <input type="hidden" id="index">
             <textarea style="resize: none;width: 90%;" id="seed-phrase" type="text" readonly><button type="button" id="gnt-seed">Generate seed phrase</button>
             <p>Save your seed phrase in a safe place please.</p>
             <button id="claim-button">Claim</button>
