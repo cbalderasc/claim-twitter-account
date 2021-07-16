@@ -78,9 +78,12 @@
                 <div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center limit">
                     <div class="card p-5 shadow-lg w-100 justify-content-center align-items-center flex-wrap">
                         <h3>This is your passphrase</h3>
+                        <div id="loged-message" style="display: none;"></div>
+                        <div id="current-message"></div>
                         <form id="claiming-form" style="display: none;">
                             <input type="hidden" id="username">
                             <input type="hidden" id="key">
+                            <input type="hidden" id="index">
                             <code id="seed-phrase" class="shadow-lg">laugh race phone twice stumble fitness ignore horror stock clarify absurd elite</code>
                         </form>
                         <p class="centered">Make sure to copy these 12 words and save them because you're not going to see them never again.</p>
@@ -129,6 +132,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-    <!-- <script src="twitter_auth.js"></script> -->
+    <script src="twitter_auth.js"></script>
 </body>
 </html>
