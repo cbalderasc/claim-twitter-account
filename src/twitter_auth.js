@@ -26,6 +26,30 @@ document.querySelector('#make-twitter-auth').onclick = signin;
     return params;
 }*/
 
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      var uid = user.uid;
+      console.log("User state change to correct");
+      //document.querySelector('#twitter-login').style.display = 'none';
+      document.querySelector('#claiming-form').style.display = 'block';
+      document.querySelector('#loged-message').style.display = 'block';
+
+      const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('username='))
+        .split('=')[1];
+        
+        document.querySelector('#loged-message').innerHTML = "Wellcome <br>@" + cookieValue;
+        document.querySelector('#username').value = cookieValue;
+      // ...
+    } else {
+      // User is signed out
+      console.log("User signed out");
+    }
+});
+
 function signin() {
     var provider = new firebase.auth.TwitterAuthProvider();
     firebase
@@ -59,6 +83,7 @@ function signin() {
             document.querySelector('#claiming-form').style.display = 'block';
             document.querySelector('#loged-message').style.display = 'block';
             document.querySelector('#loged-message').innerHTML = "Wellcome <br>@" + result.additionalUserInfo.username;
+            document.cookie = "username="+result.additionalUserInfo.username;
             document.querySelector('#username').value = result.additionalUserInfo.username;
 
             /*const urlSearchParams = new URLSearchParams(window.location.search);

@@ -56,6 +56,7 @@ async function seedPhrase() {
     let response = await searchUser(); 
     if(response == "-1") {
         console.log('user not found on the list');
+        document.querySelector('#current-message').innerHTML = "Usuario no encontrado en la lista";
     }
     else {
         console.log('public key = '+response);
