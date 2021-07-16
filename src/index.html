@@ -1,52 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="./assets/favicon.ico" />
-	<link rel="apple-touch-icon" href="./assets/favicon.ico" />
-	<title>NEAR Claim Twitter Account</title>
-	<!--<link rel="stylesheet" href="global.css">-->
-	<link rel="stylesheet" href="assets/css/styles.min.css">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<title>Near Growth - Twitter</title>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	
+	<!-- Favicons -->
+	<link href="techie/img/favicon.png" rel="icon">
+	<link href="techie/img/apple-touch-icon.png" rel="apple-touch-icon">
+	
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	
+	<!-- Vendor CSS Files -->
+	<link href="techie/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="techie/vendor/icofont/icofont.min.css" rel="stylesheet">
+	<link href="techie/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="techie/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link href="techie/vendor/venobox/venobox.css" rel="stylesheet">
+	<link href="techie/vendor/aos/aos.css" rel="stylesheet">
+	
+	<!-- Template Main CSS File -->
+	<link href="techie/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-	<!--
-		<br><br><br><br>
-		<p><label>Account id:&nbsp&nbsp&nbsp</label><label id="account-id"></label></p>
-		<p><label>Balance:&nbsp&nbsp&nbsp</label><label id="balance"></label></p>
-		<p>Data for new account</p>
-		<p>Account name: <input id="new-recipient">&nbsp&nbsp<button id="btn-create">Create account</button></p>
-		<a href="load.html">Load</a>
-		<a href="claim.html">Claim</a>
-	-->
-	<div class="container">
-		<div id="auth">
-			<button id="sign-in-button">Sign in</button>
-			<button class="link" style="float: right" id="sign-out-button">
-				Sign out
-			</button>
+	<!-- ======= Header ======= -->
+	<header id="header" class="fixed-top ">
+		<div class="container-fluid">
+			
+			<div class="row justify-content-center">
+				<div class="col-xl-9 d-flex align-items-center">
+					<a href="index.html" class="logo mr-auto"><img src="techie/img/logo.png" alt="" class="img-fluid"></a>
+					<nav class="nav-menu d-none d-lg-block">
+						<ul>
+							<li class="active"><a href="index.html">Home</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#features">NFT</a></li>
+						</ul>
+					</nav><!-- .nav-menu -->
+					<a href="claim.html" class="get-started-btn scrollto">CLAIM GIFT</a>
+				</div>
+			</div>
+			
 		</div>
-		<div id="data">
-			<div id="account-id"></div>
-			<div id="balance"></div>
+	</header><!-- End Header -->
+	
+	<!-- ======= Hero Section ======= -->
+	<section id="hero" class="d-flex align-items-center">
+		
+		<div class="container-fluid" data-aos="fade-up">
+			<div class="row justify-content-center">
+				<div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+					<h1>Claim your Twitter username on NEAR</h1>
+					<h2>Would you like to claim your Twitter username and generate a wallet to send and receive NEAR tokens anywhere?</h2>
+					<h2>Do it right now and receive an exclusive NFT gift.</h2>
+					<div><a href="claim.html" class="btn-get-started scrollto">CLAIM GIFT</a></div>
+				</div>
+				<div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
+					<img src="techie/img/hero-img.png" class="img-fluid animated" alt="">
+				</div>
+			</div>
 		</div>
-		<form id="loading-form">
-			<label class="file-container">
-				<input type="file" id="username-list" name="username-list" aria-label="Select a file with twitter usernames">
-				<span class="file-custom"></span>
-			</label>
-		</form>
-		<div id="list-rendered">
-			<ul id="list-rendered-inner"></ul>
-			<button id="process-list">Process</button>
+		
+	</section><!-- End Hero -->
+	
+	<main id="main">
+		
+		<!-- ======= About Section ======= -->
+		<section id="about" class="about">
+			<div class="container">
+				
+				<div class="row">
+					<div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="150">
+						<img src="techie/img/about.jpg" class="img-fluid" alt="">
+					</div>
+					<div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
+						<h3>About NEAR</h3>
+						<p class="font-italic">
+							NEAR Protocol is a climate-neutral, high-speed, and low transaction fee Layer-1 Blockchain platform. #NEAR is the Infrastructure for Innovation. With NEAR you are able to:
+						</p>
+						<ul>
+							<li><i class="icofont-check-circled"></i> Use applications on NEAR.</li>
+							<li><i class="icofont-check-circled"></i> Participate in network governance.</li>
+							<li><i class="icofont-check-circled"></i> Earn token rewards by staking to the network</li>
+						</ul>
+						<a href="#" class="read-more">LEARN MORE<i class="icofont-long-arrow-right"></i></a>
+					</div>
+				</div>
+				
+			</div>
+		</section><!-- End About Section -->
+		
+		<!-- ======= Counts Section ======= -->
+		<section id="counts" class="counts">
+			<div class="container">
+				
+				<div class="row counters">
+					
+					<div class="col-lg-3 col-6 text-center">
+						<span data-toggle="counter-up">180,000</span>
+						<p>Users</p>
+					</div>
+					
+					<div class="col-lg-3 col-6 text-center">
+						<span data-toggle="counter-up">521</span>
+						<p>Projects</p>
+					</div>
+					
+					<div class="col-lg-3 col-6 text-center">
+						<span data-toggle="counter-up">21</span>
+						<p>Guilds</p>
+					</div>
+					
+					<div class="col-lg-3 col-6 text-center">
+						<span data-toggle="counter-up">3,500</span>
+						<p>Commits</p>
+					</div>
+					
+				</div>
+				
+			</div>
+		</section><!-- End Counts Section -->
+		
+		
+		<!-- ======= Features Section ======= -->
+		<section id="features" class="features">
+			<div class="container" data-aos="fade-up">
+				
+				<div class="section-title">
+					<h2>NFT / GUILD</h2>
+					<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-6 order-2 order-lg-1 d-flex flex-column align-items-lg-center">
+						<div class="icon-box mt-5 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
+							<i class="bx bx-receipt"></i>
+							<h4>Est labore ad</h4>
+							<p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+						</div>
+						<div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="200">
+							<i class="bx bx-cube-alt"></i>
+							<h4>Harum esse qui</h4>
+							<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+						</div>
+						<div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="300">
+							<i class="bx bx-images"></i>
+							<h4>Aut occaecati</h4>
+							<p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+						</div>
+						<div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="400">
+							<i class="bx bx-shield"></i>
+							<h4>Beatae veritatis</h4>
+							<p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+						</div>
+					</div>
+					<div class="image col-lg-6 order-1 order-lg-2 " data-aos="zoom-in" data-aos-delay="100">
+						<img src="techie/img/features.svg" alt="" class="img-fluid">
+					</div>
+				</div>
+				
+			</div>
+		</section><!-- End Features Section -->
+		
+		
+	</main><!-- End #main -->
+	
+	<!-- ======= Footer ======= -->
+	<footer id="footer">
+		
+		<div class="container">
+			
+			<div class="copyright-wrap d-md-flex py-4">
+				<div class="mr-md-auto text-center text-md-left">
+					<div class="copyright">
+						<strong><span>2021 NEAR Protocol</span></strong>. All Rights Reserved
+					</div>
+				</div>
+			</div>
+			
+			
 		</div>
-		<div class="row">
-			<a href="claim.html">Claim an account</a>
-		</div>
-		<div class="row">
-			<a href="landing.html">Landing</a>
-		</div>
-	</div>
-	<script src="./index.js"></script>
+	</footer><!-- End Footer -->
+	
+	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+	<div id="preloader"></div>
+	
+	<!-- Vendor JS Files -->
+	<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+	<script src="techie/vendor/jquery.easing/jquery.easing.min.js"></script>
+	<script src="techie/vendor/waypoints/jquery.waypoints.min.js"></script>
+	<script src="techie/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="techie/vendor/php-email-form/validate.js"></script>
+	<script src="techie/vendor/counterup/counterup.min.js"></script>
+	<script src="techie/vendor/owl.carousel/owl.carousel.min.js"></script>
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+	<script src="techie/vendor/venobox/venobox.min.js"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	
+	<!-- Template Main JS File -->
+	<script src="techie/js/main.js"></script>
 </body>
+
 </html>

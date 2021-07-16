@@ -1,29 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Near | Claiming Module</title>
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<title>Near Growth - Twitter</title>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	
+	<!-- Favicons -->
+	<link href="techie/img/favicon.png" rel="icon">
+	<link href="techie/img/apple-touch-icon.png" rel="apple-touch-icon">
+	
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	
+	<!-- Vendor CSS Files -->
+	<link href="techie/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="techie/vendor/icofont/icofont.min.css" rel="stylesheet">
+	<link href="techie/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="techie/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link href="techie/vendor/venobox/venobox.css" rel="stylesheet">
+	<link href="techie/vendor/aos/aos.css" rel="stylesheet">
+	
+	<!-- Template Main CSS File -->
+	<link href="techie/css/style.css" rel="stylesheet">
+    <link href="assets/css/main.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- ======= Header ======= -->
+	<header id="header" class="fixed-top ">
+		<div class="container-fluid">
+			
+			<div class="row justify-content-center">
+				<div class="col-xl-9 d-flex align-items-center">
+					<a href="index.html" class="logo mr-auto"><img src="techie/img/logo.png" alt="" class="img-fluid"></a>
+					<nav class="nav-menu d-none d-lg-block">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#features">NFT</a></li>
+						</ul>
+					</nav><!-- .nav-menu -->
+					<!-- <a href="#about" class="get-started-btn scrollto">Login</a> -->
+				</div>
+			</div>
+			
+		</div>
+	</header><!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+	<section id="hero" class="d-flex align-items-center">
+		
+		<div class="container-fluid">
+			<div id="login-card" class="row justify-content-center">
+				<div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+					<h1>Who's it?</h1>
+					<h2>Before claiming your account you need to verify your identity by login to your Twitter account.</h2>
+                    <div><a id="make-twitter-auth" class="btn-get-started">Login with Twitter</a></div>
+				</div>
+				<div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img centered">
+					<svg viewBox="0 0 24 24" aria-hidden="true" class="twitter-logo"><g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g></svg>
+				</div>
+			</div>
+
+			<div id="preparation-card" class="row novisible justify-content-center align-items-center">
+                <div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                    <div class="card p-5 shadow-lg w-100 justify-content-center align-items-center flex-wrap">
+                        <h3>Your wallet is ready</h3>
+                        <p class="centered">Now we're going to give you some words that you need to save in a safe place because they'll be needed to login later in another devices.</p>
+                        <div><a id="gnt-seed" href="#" class="read-more">Give it to me<i class="icofont-long-arrow-right"></i></a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="passphrase-card" class="row novisible justify-content-center align-items-center">
+                <div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center limit">
+                    <div class="card p-5 shadow-lg w-100 justify-content-center align-items-center flex-wrap">
+                        <h3>This is your passphrase</h3>
+                        <form id="claiming-form" style="display: none;">
+                            <input type="hidden" id="username">
+                            <input type="hidden" id="key">
+                            <code id="seed-phrase" class="shadow-lg">laugh race phone twice stumble fitness ignore horror stock clarify absurd elite</code>
+                        </form>
+                        <p class="centered">Make sure to copy these 12 words and save them because you're not going to see them never again.</p>
+                        <div><a id="claim-button" href="#" class="read-more">Here's your wallet<i class="icofont-long-arrow-right"></i></a></div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+	</section><!-- End Hero -->
+
+    <!--
     <div class="container">
         <div id="twitter-login" style="text-align: center;">
-            <p>
-                Before claiming an account you need to login with Twitter 
-            </p>
+            <p>Before claiming an account you need to login with Twitter</p>
             <a href="#!" id="make-twitter-auth">
                 <img src="assets/twitter_button.png" alt="" width="330px">
             </a>
         </div>
-        <div class="profile">
-            <img id="profile-image" src="" alt="">
-            <div id="loged-message" style="display: none;">
-            </div>
-        </div>
-        <div id="current-message">
-        </div>
+        <div id="loged-message" style="display: none;"></div>
         <form id="claiming-form" style="display: none;">
             <h3>Claim your wallet</h3>
             <input type="hidden" id="username">
@@ -34,10 +111,24 @@
             <button id="claim-button">Claim</button>
         </form>
     </div>
+    -->
     <script src="claim.js"></script>
-</body>
+
+    <!-- Vendor JS Files -->
+	<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+	<script src="techie/vendor/jquery.easing/jquery.easing.min.js"></script>
+	<script src="techie/vendor/waypoints/jquery.waypoints.min.js"></script>
+	<script src="techie/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="techie/vendor/php-email-form/validate.js"></script>
+	<script src="techie/vendor/counterup/counterup.min.js"></script>
+	<script src="techie/vendor/owl.carousel/owl.carousel.min.js"></script>
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+	<script src="techie/vendor/venobox/venobox.min.js"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Twitter authentication -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-    <script src="twitter_auth.js"></script>
+    <!-- <script src="twitter_auth.js"></script> -->
+</body>
 </html>
