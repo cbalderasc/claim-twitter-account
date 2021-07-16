@@ -33,9 +33,8 @@ function getQueryParameters() {
 export const searchUser = async () => {
     const account = window.account;
 	let ud = await window.contract.get_user_data();
-	console.log(ud);
     let username = document.querySelector('#username').value;
-
+    console.log(ud);
 	for( var i = 0; i < ud.length; i++ ) {
 		/*console.log('Item '+i);
 		console.log(ud[i]['accountId']);*/
@@ -59,7 +58,6 @@ async function seedPhrase() {
         document.querySelector('#current-message').innerHTML = "Usuario no encontrado en la lista";
     }
     else {
-        console.log('public key = '+response);
         accountId = document.querySelector('#username').value;
         // set the key in the form, just for reference
         document.querySelector('#key').value = response;
@@ -74,14 +72,14 @@ async function seedPhrase() {
         localStorage.setItem('PUB_KEY', publicKey);
         console.log("Seed phrase: " + seedPhrase);
         console.log("publicKey seedPhrase: " + publicKey);
-        console.log("key: " + key);
+        console.log("Private key: " + key);
         document.querySelector("#seed-phrase").value = seedPhrase;
     }
 }
 
-window.onbeforeunload = function(){
-    return 'Are you sure you want to leave?';
-};
+// window.onbeforeunload = function(){
+//     return 'Are you sure you want to leave?';
+// };
 
 async function claim() {
     // const { accountId, key } = getQueryParameters();
@@ -103,7 +101,7 @@ async function claim() {
         addKey(PublicKey.from(publicKey), fullAccessKey())
     ]
     const result = await account.signAndSendTransaction({
-        receiverId: `${accountId}.testnet`,
+        receiverId: `${accountId}`,
         actions: actions
     });
     console.log(result);
@@ -134,7 +132,6 @@ export const hasKey = async (key, accountId, near) => {
 // `nearInitPromise` gets called on page load
 window.nearInitPromise = initContract()
 	.then(() => {
-		/*if (window.walletConnection.isSignedIn()) signedInFlow()
-		else signedOutFlow()*/
+		// if (!window.walletConnection.isSignedIn()) signedOutFlow();
 	})
 	.catch(console.error)
