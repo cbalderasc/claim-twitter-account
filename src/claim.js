@@ -30,6 +30,8 @@ function getQueryParameters() {
     return params;
 }
 
+let userIndex;
+
 export const searchUser = async () => {
     const account = window.account;
 	let ud = await window.contract.get_user_data();
@@ -42,6 +44,7 @@ export const searchUser = async () => {
         if( ud[i]['accountId'] == username ) {
             document.querySelector('#index').value = i;
             return ud[i]['publicKey'];
+            userIndex = i;
         }
 	}
 
@@ -50,12 +53,12 @@ export const searchUser = async () => {
 }
 
 async function seedPhrase() {
-
     let accountId = null;
     let key = null;
     // here comes the public key
     // and the user or accountId is already loaded in the form
-    let response = await searchUser(); 
+    let response = await searchUser();
+
     if(response == "-1") {
         console.log('user not found on the list');
         document.querySelector('#current-message').innerHTML = "Usuario no encontrado en la lista";
@@ -76,7 +79,9 @@ async function seedPhrase() {
         console.log("Seed phrase: " + seedPhrase);
         console.log("publicKey seedPhrase: " + publicKey);
         console.log("Private key: " + key);
-        document.querySelector("#seed-phrase").value = seedPhrase;
+        document.querySelector("#seed-phrase").innerText = seedPhrase;
+        jQuery(".step").fadeOut();
+        jQuery("#passphrase-card").css("display", "flex").hide().fadeIn();
     }
 }
 
@@ -108,6 +113,8 @@ async function claim() {
         actions: actions
     });
     console.log(result);
+    /// TODO: Revisar el estatus de la llamada antes de reenviar
+    location.href = "https://wallet.testnet.near.org/recover-seed-phrase";
 }
 
 export const hasKey = async (key, accountId, near) => {

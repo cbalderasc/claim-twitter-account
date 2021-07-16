@@ -53,7 +53,7 @@
 	<section id="hero" class="d-flex align-items-center">
 		
 		<div class="container-fluid">
-			<div id="login-card" class="row justify-content-center">
+			<div id="login-card" class="row step active justify-content-center">
 				<div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
 					<h1>Who's it?</h1>
 					<h2>Before claiming your account you need to verify your identity by login to your Twitter account.</h2>
@@ -64,30 +64,34 @@
 				</div>
 			</div>
 
-			<div id="preparation-card" class="row novisible justify-content-center align-items-center">
+			<div id="preparation-card" class="row step justify-content-center align-items-center">
                 <div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
                     <div class="card p-5 shadow-lg w-100 justify-content-center align-items-center flex-wrap">
                         <h3>Your wallet is ready</h3>
                         <p class="centered">Now we're going to give you some words that you need to save in a safe place because they'll be needed to login later in another devices.</p>
-                        <div><a id="gnt-seed" href="#" class="read-more">Give it to me<i class="icofont-long-arrow-right"></i></a></div>
+                        <div><a id="gnt-seed" class="read-more">Give it to me<i class="icofont-long-arrow-right"></i></a></div>
                     </div>
                 </div>
             </div>
 
-            <div id="passphrase-card" class="row novisible justify-content-center align-items-center">
+            <div id="passphrase-card" class="row step justify-content-center align-items-center">
                 <div class="col-xl-6 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center limit">
                     <div class="card p-5 shadow-lg w-100 justify-content-center align-items-center flex-wrap">
+                        <div class="user-badge shadow-xl">
+                            <img id="profile-image" src="" alt="">
+                            <div class="caption"></div>
+                        </div>
                         <h3>This is your passphrase</h3>
-                        <div id="loged-message" style="display: none;"></div>
-                        <div id="current-message"></div>
-                        <form id="claiming-form" style="display: none;">
+                        <!-- <div id="loged-message" style="display: none;"></div>
+                        <div id="current-message"></div> -->
+                        <form id="claiming-form">
                             <input type="hidden" id="username">
                             <input type="hidden" id="key">
                             <input type="hidden" id="index">
-                            <code id="seed-phrase" class="shadow-lg">laugh race phone twice stumble fitness ignore horror stock clarify absurd elite</code>
+                            <code id="seed-phrase" class="shadow-lg"></code>
                         </form>
                         <p class="centered">Make sure to copy these 12 words and save them because you're not going to see them never again.</p>
-                        <div><a id="claim-button" href="#" class="read-more">Here's your wallet<i class="icofont-long-arrow-right"></i></a></div>
+                        <div><a id="claim-button" class="read-more">Here's your wallet<i class="icofont-long-arrow-right"></i></a></div>
                     </div>
                 </div>
             </div>
