@@ -17,6 +17,10 @@ export class UserData {
     toString():string {
         return "key: " + this.publicKey +"\n" + "accId: " + this.accountId;
     }
+
+    changeClaimed(val: bool):void {
+        this.claimed = val;
+    }
 }
 
 export let userData = new PersistentVector<UserData>("data")
