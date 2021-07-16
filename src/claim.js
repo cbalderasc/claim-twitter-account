@@ -42,7 +42,6 @@ export const searchUser = async () => {
             return ud[i]['publicKey'];
         }
 	}
-
     return "-1";
 }
 
